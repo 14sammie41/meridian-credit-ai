@@ -65,7 +65,23 @@ The biggest limitation will be that an application may not be complete without t
 | housing_status | Exclude from baseline prediction; retain for fairness evaluation | Fairness and proxy risk | Provisional |
 | years_at_current_address | Investigate as a potential predictive feature | Fairness and proxy risk | Pending |
 | months_in_current_job | Include as a numerical feature | Evidence gathered so far shows defaults decrease consistently accross exploratory groups but association does not mean causation. | Provisional |
-
+| previous_application_declined | Exclude from baseline prediction; retain for historical decision comparison | Lack of information regarding why they were declined and it may be difficult to translate into a fair explanation | Provisional |
 
 ### Limitations or risks:
 ...
+
+## Decision 004 - Predictive feature selection method
+**Date:** 12-11-2026
+**Status:** Decided
+
+### Context:
+I need to establish how predictive features are selected from the entire dataset for the model.
+
+### Options considered:
+Using an exclusion list which would remove each column that we chose individually or an inclusion list which would only include the individually selected columns.
+
+### Decision and reasoning:
+In the end I chose an inclusion list to ensure that if or when the dataset changes the risk of accidental leakage is reduced and that should a new engineer be maintaining the model they don't risk the model gaining information that has not yet been vetted.
+
+### Limitations or risks:
+There is an element of extra work and maintenance involved in using an inclusion list as all new features will need vetting and then adding to said inclusion list. The risk of this is that the manual approval of these new features does not mean they will be appropriate for the model.
