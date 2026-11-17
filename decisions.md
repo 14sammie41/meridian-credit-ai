@@ -56,16 +56,18 @@ The biggest limitation will be that an application may not be complete without t
 
 | Feature | Current direction | Reason | Status |
 |---|---|---|---|
-| num_existing_credit_lines | Baseline candidate | To evaluate | Provisional |
-| num_late_payments_24m | Baseline candidate | To evaluate | Provisional |
-| credit_history | One-hot encoding | No clear ordering | Provisional |
-| checking_account_status | One-hot encoding | No clear ordering | Provisional |
-| loan_purpose | One-hot encoding | No clear ordering | Provisional |
-| employment_status | One-hot encoding | No clear ordering | Provisional |
-| housing_status | Exclude from baseline prediction; retain for fairness evaluation | Fairness and proxy risk | Provisional |
-| years_at_current_address | Investigate as a potential predictive feature | Fairness and proxy risk | Pending |
-| months_in_current_job | Include as a numerical feature | Evidence gathered so far shows defaults decrease consistently accross exploratory groups but association does not mean causation. | Provisional |
-| previous_application_declined | Exclude from baseline prediction; retain for historical decision comparison | Lack of information regarding why they were declined and it may be difficult to translate into a fair explanation | Provisional |
+| num_existing_credit_lines | Baseline candidate | To evaluate | Decided |
+| num_late_payments_24m | Baseline candidate | To evaluate | Decided |
+| credit_history | One-hot encoding | No clear ordering | Decided |
+| checking_account_status | One-hot encoding | No clear ordering | Decided |
+| loan_purpose | Exclude | No clear ordering | Decided |
+| employment_status | One-hot encoding | No clear ordering | Decided |
+| housing_status | Nominal for initial model | Fairness and proxy risk | Decided |
+| years_at_current_address | Numerical for initial model | Fairness and proxy risk | Decided |
+| months_in_current_job | Include as a numerical feature | Evidence gathered so far shows defaults decrease consistently accross exploratory groups but association does not mean causation. | Decided |
+| previous_application_declined | Include in initial model to compare without later | Not enough information to discount entirely so in the name of fairness we will run a model with and a model without. | Decided |
+| num_dependants | Exclude | Chosen to use monthly_expenses_gbp instead as it is a more relateable and numerically favourable decision | Decided |
+| residency_status | Exclude | We have enough other information regarding an applicants housing which is tangible | Decided |
 
 ### Limitations or risks:
 ...
