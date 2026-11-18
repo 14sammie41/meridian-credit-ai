@@ -87,3 +87,19 @@ In the end I chose an inclusion list to ensure that if or when the dataset chang
 
 ### Limitations or risks:
 There is an element of extra work and maintenance involved in using an inclusion list as all new features will need vetting and then adding to said inclusion list. The risk of this is that the manual approval of these new features does not mean they will be appropriate for the model.
+
+## Decision 005 - Steps to take after baseline model complete.
+**Date:** 18-11-2026
+**Status:** Provisional
+
+### Context:
+Now we have a baseline model created, I need to determine what the next step of the investigation will be.
+
+### Options considered:
+Considering the baseline acheived a test ROC-AUC of 0.8129, which is close to its cross-validation mean, but misses 165 of 287 actual defaults at its current threshold of 0.5, we will need to investigate other thresholds to see if they offer a better balance.
+
+### Decision and reasoning:
+...
+
+### Limitations or risks:
+...
