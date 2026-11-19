@@ -103,3 +103,35 @@ Considering the baseline acheived a test ROC-AUC of 0.8129, which is close to it
 
 ### Limitations or risks:
 ...
+
+## Decision 006 - Test set protection
+**Date:** 19-11-2026
+**Status:** Decided
+
+### Context:
+Having reached a good point in my first models build I referred back to the original assignment breif to find that I had mistakenly used the test set before final evaluation.
+
+### Options considered:
+I could obviously discard the original evaluation then restructure the data splits, or I could annotate like I am here and make a plan to ensure I don't do it again.
+
+### Decision and reasoning:
+I will, from this point forwards be using training-data cross-validation to ensure I do not use the test set again until final evaluation. I acknowledge that my intrigue got the best of me and will ensure to note that going forwards, however I had not used the information gained from this to inform any preprocessing, feature selection or model parameter changes.
+
+### Limitations or risks:
+This does mean that I have touched the test set pre evaluation and that I cannot say that it was totally independantly held out. The test set was held out from model training, I did inspect the results before final model selection.
+
+## Decision 007 - Deciding on a comparison model
+**Date:** 19-11-2026
+**Status:** Decided
+
+### Context:
+Having now created a baseline Logistic Regression model I need to create another model in order to have something to compare against. I am looking to compare non-linear relationships and feature interactions. 
+
+### Options considered:
+I could either go simpler or more complex, so it was between a decision tree and a random forest.
+
+### Decision and reasoning:
+I have chosen to use a random forest for my next model in order to add a layer of complexity as I would like to see if it genuinely improves our result of predicitve performance and interpretability. At this stage I will stick with one-hot encoding to minimise unnessecary differences and keep the comparison clear.
+
+### Limitations or risks:
+The following limitations are key to this, intrinsic interpretability will be reduced due to aggregations. Overfitting is a risk with each individual decision tree. Could require more resources than logistic regression.
