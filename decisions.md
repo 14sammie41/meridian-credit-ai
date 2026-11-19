@@ -135,3 +135,19 @@ I have chosen to use a random forest for my next model in order to add a layer o
 
 ### Limitations or risks:
 The following limitations are key to this, intrinsic interpretability will be reduced due to aggregations. Overfitting is a risk with each individual decision tree. Could require more resources than logistic regression.
+
+## Decision 008 - Prioritising cost-sensitive evaluation over immediate hyperparamter tuning.
+**Date:** 19-11-2026
+**Status:** Provisional
+
+### Context:
+Given the complexities involved in comparing the impact of false positives to false negatives, I was at a cross roads as to what my next move should be. Logitic Regression gave me an ROC_AUC of 0.8212 compared with an ROC_AUC of 0.7998 for Random Forests and to compound on that confusion matixes showed different numbers under FP and FN for each.
+
+### Options considered:
+I could have either started changing the hyperparameters in both my Logistic Regression model and Random Forest models respectively, comparing the result against the baseline as I went, or I could start analysing and evaluating the results I have against the real world implications of them.
+
+### Decision and reasoning:
+Considering that I do not have the actual cost of missed defaults vs incorrect declines to Meridian-Credit I will need to conduct a sensitivity analysis of the results I got so far. Should this result in the need for further investigation into what it would look like if I changed hyperparameters on the models then so be it but given the potential consequences for both business and applicant, of classification errors, I will hold off on model optimisation for now.
+
+### Limitations or risks:
+The limitation of this decision is that I only have one model to compare against and both the models I have created are run using default thresholds so there is a lot to be desired. The risk of this is due to limited models for comparison and lack of real financial implications for Meridian-Credit.
