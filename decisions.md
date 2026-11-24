@@ -151,3 +151,19 @@ Considering that I do not have the actual cost of missed defaults vs incorrect d
 
 ### Limitations or risks:
 The limitation of this decision is that I only have one model to compare against and both the models I have created are run using default thresholds so there is a lot to be desired. The risk of this is due to limited models for comparison and lack of real financial implications for Meridian-Credit.
+
+## Decision 009 - Choosing threshold points
+**Date:** 24-11-2026
+**Status:** Provisional
+
+### Context:
+The next step in sensitivity analysis is determining the range of the thresholds I should compare against.
+
+### Options considered:
+I could obviously choose an infinite number of options for this. In consideration of time and sanity I needed to find a happy medium between a wide enough range to justify my final decision and increments where I will actually see a change.
+
+### Decision and reasoning:
+Given the consistency of the results i got with the default 0.5 threshold it felt sensible to not stray too far from that so I have chosen a 0.4 - 0.6 range with increments of 0.02 to give us 11 datapoints per model. This is just an initial exploratory range.
+
+### Limitations or risks:
+I do not know that 0.5 was the optimal threshold and so I may find that actually moving in one direction or the other results is improvements beyond my hypothesis. There is a risk I will need to revise this later depending on the results I get. The other obvious risk is that the 0.02 increments wont be small enough so I will miss something.
