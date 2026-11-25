@@ -154,7 +154,7 @@ The limitation of this decision is that I only have one model to compare against
 
 ## Decision 009 - Choosing threshold points
 **Date:** 24-11-2026
-**Status:** Provisional
+**Status:** Decided
 
 ### Context:
 The next step in sensitivity analysis is determining the range of the thresholds I should compare against.
@@ -167,3 +167,38 @@ Given the consistency of the results i got with the default 0.5 threshold it fel
 
 ### Limitations or risks:
 I do not know that 0.5 was the optimal threshold and so I may find that actually moving in one direction or the other results is improvements beyond my hypothesis. There is a risk I will need to revise this later depending on the results I get. The other obvious risk is that the 0.02 increments wont be small enough so I will miss something.
+
+## Decision 010 - Picking the threshold for evaluation
+**Date:** 25-11-2026
+**Status:** Provisional
+
+### Context:
+As you can see from decision 009 we had only looked at the results for our Logistic Regression model at the default threshold which meant I had no fair comparison of data put through the model. In order to determine the final threshold to use for the test set and evaluation I needed to run all of the thresholds explained in decision 009 in order to compare the results and weigh up all the implications of those changes. This process used out-of-fold predictions from the training data in order to preserve the test for the final evaluation.
+
+### Options considered:
+As can be seen in 03_model_comparison.ipynb all of the proposed thresholds between 0.40 and 0.60 with an increment of 0.02 were applied to the same predicted probabilities as we had done previously for the default threshold. In the interest of scientific analysis we ensured the only parameter changed was the threshold itself.
+
+### Decision and reasoning:
+When comparing the result I had a number of different options to choose from but the predominant thought whilst looking at them was the ultimate consdieration of fairness for the applicant, not just financial end game for the company. The results showed that 0.48 was the one threshold that produced the lowest combined number of classification errors within the range. We got a slight increase in recall, F1 score, false positive rate and decline rate, then an equally slight reduction in precision, false negative rate and total errors when compared to the default threshold of 0.50. Having looked at the difference at either extreme of my threshold experiment (0.40 and 0.60), there was no clear winner looking at the trade-off between incorrect declines and false approvals. Every time I incrementally changed the threshold around the extremes the trade-offs were more and more noticable. I must consider the implications of our decisions on the applicants themselves, therefore trade-offs become much harder to justify when the implications on the applicant are more serious. 
+
+### Limitations or risks:
+This decision comes as a result of using assumed financial costs rather than factual numbers which poses a risk as Meridian Credit may not feel this is relateable to their business. In using assumed financial costs I used equal numerical weighting for my final decison, again risking not relating to Meridian Credits actual figures because it was more important to me when considering responsible lending. There is also a consideration around a lack of a demographic fairness analysis potentially causing unfair results.
+
+## Decision 011 - Model selection.
+**Date:** 25-11-2026
+**Status:** Decided
+
+### Context:
+I need to make a decision as to which model to eventually choose for final test and evaluation. This could only be done with comparative evaluations by using the training data and out-of-fold predictions.
+
+### Options considered:
+My initial observation of Logistic Regression was that it had good overall results for prediction, it could be slightly improved by dropping the threshold by 0.02 as evidenced in decision journal entry 010. I then ran exactly the same out-of-fold prediction comparison for the Random Forest model type to give us a complete comparison.
+
+### Decision and reasoning:
+When comparing directly, Logistic Regression(LR) and Random Forest(RF) at their respective lowest error thresholds, you can see a clear difference in the F1 score and combined classification errors with LR reporting 46 less classification errors at each models lowest total error count and a 4.45 percentage point drop for RF F1 score.
+When considering the impacts of what I can see in this direct comparison to responsible lending, it was more important to me that there was a balance between an incorrect decline and a false approval. You can see that at a threshold or 0.48 for LR you get 861 total errors compared with a threshold of 0.46 for RF you get 907 total errors (The thresholds chosen for this comparison are that because they gave me the lowest combined error count). This will result in 19 more incorrect declines, 65 less incorrect acceptances and 46 fewer classification errors overall compared with RF at the same threshold.
+The model that gave me the balance I was looking for was Logistic Regression at a threshold of 0.48 as the other thresholds checked against both models had trade offs that were not comparable. For example even when looking at all of the cost ratios Random Forest theoretically would have cost Meridian Credit more.
+Given the importance of explainability in reference to lending LR lends itself to intrinsic interpretability, therefore supporting the need to explain to the applicant i plain English, the decision made.
+
+### Limitations or risks:
+There is a significant limitation in that I am choosing to accept a model which has a higher decline rate overall which must be justified in my next decisions relating to fairness. I also must acknowledge that I have not tuned Random Forest exhaustively or compared every possible threshold as explained in decision journal entry 009. I am yet to assess demographic fairness.
