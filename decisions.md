@@ -202,3 +202,35 @@ Given the importance of explainability in reference to lending LR lends itself t
 
 ### Limitations or risks:
 There is a significant limitation in that I am choosing to accept a model which has a higher decline rate overall which must be justified in my next decisions relating to fairness. I also must acknowledge that I have not tuned Random Forest exhaustively or compared every possible threshold as explained in decision journal entry 009. I am yet to assess demographic fairness.
+
+## Decision 012 - Explainability technique selection
+**Date:** 26-11-2026
+**Status:** Provisional
+
+### Context:
+When creating the final application which will be viewable to the applicant I need to be able to explain in plain English, why the model has made the decision that it has. I will also need a technical explanation for the Meridian Credit team to be able to analyse along with the need to audit the decisions the model has made too.
+
+### Options considered:
+In consideration of my choice to work with Logistic Regression in my final model, the two explainability techniques that fit best were SHAP and intrinsic feature contributions. SHAP would give me an explicit reference baseline and a broader potential for future changes in the model. Counter to that, intrinsic feature contributions would give me less complexity and no extra need for dependancies, keeping the dependancy footprint small. I would however need to define the explicit reference baseline myself.
+
+### Decision and reasoning:
+I did consider using both, having intrinsic feature contributions for my technical explanasion and SHAP for my plain English explanation but upon further review I accepted that the risk of the two different methods giving even slightly different results would risk inconsistent interpretations. Given the importance of transparency in financial lending scenario I have decided to use intrinsic feature contributions as it will avoid conflicting interpetations making auditing cleaner, reduces implemetation complexity and gives me meaningful responses for communicating good and bad factors to clients and colleagues alike.
+
+### Limitations or risks:
+Should the model get more complex in future iterations it would be harder to continue using intrinsic feature contributions as they do really lend themselves to the simpler model type of Logistic Regression meaning the developer in the future has some extra work. Reversing the encoding decisions made thus far will require grouping. Making my own decision about a reference baseline could have unfair influence on interpretations. 
+
+## Decision 013 - Selection of reference points for individual feature contributions
+**Date:** 26-11-2026
+**Status:** Decided
+
+### Context:
+Having collated the transformed feature values in 04_explainability.ipynb I can now see the raw contributions each is making by multiplying the transformed feature value by its corresponding coefficient. This has allowed me to see that zero has different meanings depending on the preprocessing method used. If I was to use the all-zero one-hot encoded feature group as is, it is not representative of a valid category or any known categories for that matter.
+
+### Options considered:
+I could retain the original zero reference point, I could use the training population's weighted average or I could select an existing reference category for each of the nominal features.
+
+### Decision and reasoning:
+I have decided to keep the reference points for numerical and binary features as they are because they are easily explainable. Then with nominal categories I will reference it based on the most frequently occurring category in the training data. This will keep my model explainable both in the technical and plain English responses required, it will avoid extra subjective financial judgments on selection of reference categories and will be reproducible with training-derived reference points. The reference categories I choose will remain fixed during testing and application.
+
+### Limitations or risks:
+Just because it's the most common category, does not mean it doesn't have any bias or is financially neutral, I will document this as I work through. This decision will only change the explanation not the prediction itself.
