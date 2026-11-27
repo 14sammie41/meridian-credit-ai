@@ -234,3 +234,19 @@ I have decided to keep the reference points for numerical and binary features as
 
 ### Limitations or risks:
 Just because it's the most common category, does not mean it doesn't have any bias or is financially neutral, I will document this as I work through. This decision will only change the explanation not the prediction itself.
+
+## Decision 012 - Fairness evaluation methodology
+**Date:** 27-11-2026
+**Status:** Decided
+
+### Context:
+Having excluded protected characteristics in the model build itself does not eliminate the risk of discrimination and I must investigate and document these.
+
+### Options considered:
+Looking at demographic parity, predictive equality and equalised odds I evaluated all seven excluded attributes to determine my next steps.
+
+### Decision and reasoning:
+Considering the impact of financial experience, societal inequalities and geographical disadvantages I have opted to use equalised odds as it will be looking at actual results from false positive rates and false negative rates accross groups and backing it up with demographic parity. The three attributes I have chosen to prioritise are `age_years`, `sex` and `region`. Some other features could indirectly reflect age and it is a risk due to financial experience, someone at age 19 may have a less established credit history ect. of someone at 45 or 75. Sex has a significant risk with the known gender pay gap. Region could reveal geographical disparities that would not have been noticed otherwise.
+
+### Limitations or risks:
+Based on the sample size we have it could provide less reliable results than if we had a larger one. There is no way of establishing causation from the analysis. Only evaluating three attributes does limit the scope overall. There is an amount of statistical uncertainty.
